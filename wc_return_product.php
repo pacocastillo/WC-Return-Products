@@ -54,7 +54,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
           if ( sizeof( $products ) > 0 ) {
             echo '<option value="0">' . __('Select products...','wc_return') . '</option>';
             foreach( $products as $item ) {
-              echo '<option value="' . $item['item_meta']['_product_id'][0] . '">' . __($item['name'], 'wc_return') . '</option>';
+              echo '<option value="' . $item['item_meta']['_product_id'][0] . '">' . __(esc_html($item['name']), 'wc_return') . '</option>';
             }
             echo '<option value="';
             foreach( $products as $item ) {
@@ -85,28 +85,36 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       $customer = $woocommerce->customer;
       $json = array();
       $json['result'] = false;
+      $to = is_email( sanitize_email( $_POST['customer'] ) );
+      $order_id = (is_int($_POST['order'])) ? $_POST['order'] : false;
 
       // check if selected some product
-      if ( $_POST['products'] == 0 ) {
+      if ( $_POST['products'] == 0  ) {
         $json['response'] = __('You must select some product','wc_return');
       }
+      else if ( !$to ) {
+        $json['response'] = __('You must enter a valid email','wc_return'); 
+      }
+      else if ( !$order_id ) {
+        $json['response'] = __('You must enter a valid order id','wc_return');  
+      }
       else {
-
-        $headers = 'From: '.$_POST['customer']."\r\n".
-            'Reply-To: '.$_POST['customer']."\r\n".
+        $headers = 'From: '.$to."\r\n".
+            'Reply-To: '.$to."\r\n".
             'X-Mailer: PHP/'.phpversion();
 
         $to = (get_option( 'wc_return_email' ) != '') ? get_option( 'wc_return_email' ) : get_option( 'admin_email' );
-        $subject = __('Product return. Order no. ','wc_return') . $_POST['order'];
+        $subject = __('Product return. Order no. ','wc_return') . $order_id;
 
-        $message = 'Client with email [' . $_POST['customer'] . '] want´s return a order with id = ' . $_POST['order'] . '<br><br>';
+        $message = 'Client with email [' . $to . '] want´s return a order with id = ' . $order_id . '<br><br>';
 
         $all_products = explode(',', $_POST['products']);
         $message .= '<ul>';
         foreach ($all_products as $prod_id) {
-          if ( $prod_id != '' ) {
+          if ( is_int( $prod_id ) ) {
             $prod = new WC_Product($prod_id);
-            $message .= '<li><b>' . $prod->post->post_title . ':</b> ' . $prod->id . '</li>';
+            if ( $prod )
+              $message .= '<li><b>' . $prod->post->post_title . ':</b> ' . $prod->id . '</li>';
           }
         }
         $message .= '</ul>';
@@ -147,23 +155,73 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
     }
     else {
       $the_email = get_option( 'wc_return_email' );
+      $days = get_option( 'wc_return_days' );
       if ( $_POST ) {
+        $save = null;
         if ( isset( $_POST['wc_return_email'] ) ) {
-          $the_email = $_POST['wc_return_email'];
-          update_option( 'wc_return_email', $the_email );
+          $the_email = sanitize_email( $_POST['wc_return_email'] );
+          if ( is_email( $the_email ) ) {
+            update_option( 'wc_return_email', $the_email );
+            $save = true;
+          }
+          else {
+            echo '<div class="error message">' . __('You must enter a valid email','wc-return') . '</div>';
+          }
         }
         if ( isset( $_POST['wc_return_days'] ) ) {
-          $days = $_POST['wc_return_days'];
-          update_option( 'wc_return_days', $days );
+          $days = sanitize_text_field( $_POST['wc_return_days'] );
+          if ( is_numeric( $days ) ) {
+            update_option( 'wc_return_days', intval( $days ) );
+            $days = intval( $days );
+            $save = true;
+          }
+          else {
+            echo '<div class="error message">' . __('You must enter a valid number','wc-return') . '</div>';
+          }
         }
-        echo '<div class="updated message">' . __('Changes saved','wc-return') . '</div>';
+        if ( $save )
+          echo '<div class="updated message">' . __('Changes saved','wc-return') . '</div>';
       }
-      echo '<h3>WC Return Products Options</h3>';
+
       echo '<form action="" method="post" accept-charset="utf-8">';
-      echo '<label>' . __('Enter email to send return orders','wc_return') . '<input name="wc_return_email" type="text" value="' . $the_email . '" /></label><br>';
-      echo '<label>' . __('How many days will be active this form after the order is completed?','wc_return') . '<input name="wc_return_days" type="number" value="' . $days . '" /></label><br>';
-      echo '<input type="submit" value="' . __('Submit', 'wc_return') . '" />';
+      echo '<h3>WC Return Products Options</h3>';
+      echo '<table class="form-table">';
+      echo '  <tbody>';
+      echo '    <tr>';
+      echo '    <th scope="row">';
+      echo '      <label for="wc_return_email">'.__('Enter email to send return orders','wc_return').'</label>';
+      echo '    </th>';
+      echo '    <td>';
+      echo '      <input id="wc_return_email" name="wc_return_email" type="text" value="' . $the_email . '" />';
+      echo '      <br>';
+      echo '      <span class="description">'.__('This email will receive notices of return.','clever').'</span>';
+      echo '    </td>';
+      echo '    </tr>';
+      echo '    <tr>';
+      echo '    <th scope="row">';
+      echo '      <label for="wc_return_days">'.__('How many days will be active this form after the order is completed?','wc_return').'</label>';
+      echo '    </th>';
+      echo '    <td>';
+      echo '      <input id="wc_return_days" name="wc_return_days" type="number" value="' . $days . '" />';
+      echo '      <br>';
+      echo '      <span class="description">'.__('Number of days that the form will be active after the order has been completed.','clever').'</span>';
+      echo '    </td>';
+      echo '    </tr>';
+      echo '  </tbody>';
+      echo '</table>';
+      echo '    <p class="submit"><input type="submit" value="Save Changes" class="button-primary" name="Submit"></p>';
       echo '</form>';
     }
   }
+}
+
+function wc_error_email() {
+  echo '<div class="error">';
+  echo '  <p>' . __( 'You must enter a valid email', 'wc-return' ) . '</p>';
+  echo '</div>';
+}
+function wc_error_number() {
+  echo '<div class="error">';
+  echo '  <p>' . __( 'You must enter a valid number', 'wc-return' ) . '</p>';
+  echo '</div>';
 }
