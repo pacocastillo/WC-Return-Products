@@ -7,13 +7,15 @@ Stable tag: 4.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin allows you to add a form that send email with the product that user want's to return when an order is placed in woocommerce.
+Add a form to Woocommerce order and let users return products.
 
 == Description ==
 
 This plugin allows you to add a form that send email with the product that user want's to return when an order is placed in woocommerce.
 
-You can set user email, and how many days will be active this form order.
+You can set user email, and how many days will be active this form in a order.
+
+**If you find a bug or want to make an upgrade fill free to do it at [GitHub](https://github.com/pacocastillo/WC-Return-Products)**
 
 
 == Installation ==
