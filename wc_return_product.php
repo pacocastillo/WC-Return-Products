@@ -87,7 +87,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       $json['result'] = false;
       $to = is_email( sanitize_email( $_POST['customer'] ) );
       $order = new WC_Order( (int)$_POST['order'] );
-      $order_id = ($order != null) ? $_POST['order'] : false; 
+      $order_id = ($order != null) ? $_POST['order'] : false;
 
       // check if selected some product
       if ( $_POST['products'] == 0  ) {
