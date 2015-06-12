@@ -86,7 +86,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       $json = array();
       $json['result'] = false;
       $to = is_email( sanitize_email( $_POST['customer'] ) );
-      $order_id = (is_int($_POST['order'])) ? $_POST['order'] : false;
+      $order = new WC_Order( (int)$_POST['order'] );
+      $order_id = ($order != null) ? $_POST['order'] : false;
 
       // check if selected some product
       if ( $_POST['products'] == 0  ) {
@@ -96,7 +97,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
         $json['response'] = __('You must enter a valid email','wc_return'); 
       }
       else if ( !$order_id ) {
-        $json['response'] = __('You must enter a valid order id','wc_return');  
+        $json['response'] = __('You must enter a valid order id','wc_return') . $_POST['order'] . is_int( $_POST['order'] );  
       }
       else {
         $headers = 'From: '.$to."\r\n".

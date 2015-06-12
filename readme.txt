@@ -32,6 +32,14 @@ e.g.
 
 == Changelog ==
 
+= 1.01 =
+* Fixed error Order id validation message
+
 = 1.0 =
 * Added settings page to configure email and days.
 * Added the form to your order.
+
+== Upgrade Notice ==
+
+= 1.01 =
+* This upgrade fixed error with order id when submit form.
