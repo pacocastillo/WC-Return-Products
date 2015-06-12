@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: woo-ret\n"
+"POT-Creation-Date: 2015-02-04 17:29+0100\n"
+"PO-Revision-Date: 2015-02-04 17:34+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-"
+"content/plugins/woo-return-form\n"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:32
+msgid "Return order"
+msgstr "Devolver pedido"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:35
+msgid "Select products for return"
+msgstr "Seleccione productos a devolver"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:39
+msgid "Select products..."
+msgstr "Seleccione productos..."
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:49
+msgid "All products"
+msgstr "Todos los productos"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:56
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:144
+msgid "Submit"
+msgstr "Enviar"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:78
+msgid "You must select some product"
+msgstr "Debes seleccionar algún producto"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:87
+msgid "Product return. Order no. "
+msgstr "Producto devuelto. Pedido nº."
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:108
+msgid ""
+"Your order return request was send successfully and we contact you soon. "
+"Thank you."
+msgstr ""
+"Tu solicitud de devolución se ha enviado correctamente y nos pondremos en "
+"contacto contigo pronto. Gracias."
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:111
+msgid "Has encountered an unexpected error and was not able to send email"
+msgstr "Se ha encontrado un error inesperado y no se ha enviado el correo"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:132
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:139
+msgid "Changes saved"
+msgstr "Cambios salvados"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:143
+msgid "Enter email to send return orders"
+msgstr ""
