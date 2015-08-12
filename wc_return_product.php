@@ -5,19 +5,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /*
 Plugin Name: WC Return products
-Plugin URL: http://cleverconsulting.net/
+Plugin URL: http://castillogomez.com/
 Description: Adds a form to order for return product
-Version: 1.0
+Version: 1.2
 Author: Paco Castillo
-Author URI: http://cleverconsulting.net/
+Author URI: http://castillogomez.com/
 Text Domain: wc_return
 Domain Path: languages
-*/
+*/ 
 
 /**
  * Check if WooCommerce is active
  **/
-if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) || is_plugin_active_for_network('woocommerce/woocommerce.php') ) {
 
   add_action('wp_head','wc_return_products_ajaxurl');
 
@@ -40,6 +40,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
   function wc_return_form_template( $order ) {
     // Get WooCommerce Global
     global $woocommerce;
+
+    // if order status is not selected in wc return options
+    if (!in_array( 'wc-' . $order->get_status(), get_option( 'wc_return_statuses' ) ))
+      return;
+    // is order date is out of range of number of days in wc return options
     $last_day = (get_option( 'wc_return_days' ) == '') ? '' : date('Y-m-d', strtotime($order->post->post_date . ' + '. get_option( 'wc_return_days' ) .' days'));
     if ( ($last_day != '') && ($last_day < date("Y-m-d")) )
       return;
@@ -47,24 +52,19 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
     $products = $order->get_items();
     echo '<a class="button return-form-product" href="#">' . __('Return order','wc_return') . '</a>';
     ?>
-    <form id="wc-form-return" action="">
-      <label><?php _e('Select products for return','wc_return') ?>
-        <select name="products" class="products">
-          <?php
-          if ( sizeof( $products ) > 0 ) {
-            echo '<option value="0">' . __('Select products...','wc_return') . '</option>';
-            foreach( $products as $item ) {
-              echo '<option value="' . $item['item_meta']['_product_id'][0] . '">' . __(esc_html($item['name']), 'wc_return') . '</option>';
-            }
-            echo '<option value="';
-            foreach( $products as $item ) {
-              echo $item['item_meta']['_product_id'][0] . ',';
-            }
-            echo '">' . __('All products','wc_return') . '</option>';
+    <form id="wc-form-return" action="" method="post">
+      <label><?php _e('Select products for return','wc_return') ?></label>
+      <select id="wc_products[]" name="wc_products" class="wc_products" multiple="multiple">
+        <?php
+        if ( sizeof( $products ) > 0 ) { 
+          foreach( $products as $item ) { ?>
+            <option value="<?php echo $item['item_meta']['_product_id'][0]; ?>"><?php echo __(esc_html($item['name']), 'wc_return'); ?></option>
+          <?php 
           }
-          ?>
-        </select>
-      </label>
+        }
+        ?>
+      </select>
+      <small><?php _e('You can select multiple by holding down the CMD or Ctrl key.','wc_return'); ?></small>
       <input type="hidden" name="order" value="<?php echo $order->id; ?>" />
       <input type="hidden" name="customer" value="<?php echo $order->billing_email; ?>" />
       <input type="submit" name="submit" value="<?php _e('Submit','wc_return'); ?>" />
@@ -80,7 +80,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
     add_action( 'wp_ajax_nopriv_wc_return_form', 'send_wc_return_form' );
 
     function send_wc_return_form()
-    {
+    { 
       global $woocommerce;
       $customer = $woocommerce->customer;
       $json = array();
@@ -90,42 +90,60 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       $order_id = ($order != null) ? $_POST['order'] : false;
 
       // check if selected some product
-      if ( $_POST['products'] == 0  ) {
+      if ( count($_POST['wc_products']) == 0  ) {
         $json['response'] = __('You must select some product','wc_return');
       }
       else if ( !$to ) {
         $json['response'] = __('You must enter a valid email','wc_return'); 
       }
       else if ( !$order_id ) {
-        $json['response'] = __('You must enter a valid order id','wc_return') . $_POST['order'] . is_int( $_POST['order'] );  
+        $json['response'] = __('You must enter a valid order id','wc_return');  
       }
       else {
         $headers = 'From: '.$to."\r\n".
             'Reply-To: '.$to."\r\n".
-            'X-Mailer: PHP/'.phpversion();
+            'X-Mailer: PHP/'.phpversion()."\r\n".
+            'Content-Type: text/html; charset=UTF-8';
 
         $to = (get_option( 'wc_return_email' ) != '') ? get_option( 'wc_return_email' ) : get_option( 'admin_email' );
-        $subject = __('Product return. Order no. ','wc_return') . $order_id;
+        $subject = __('Return Order in ','wc_return') . get_bloginfo( 'name', 'display' );
 
-        $message = 'Client with email [' . $to . '] want´s return a order with id = ' . $order_id . '<br><br>';
+        ob_start();
+        echo $subject;
+        $email_heading = __('Return Order ', 'wc_return') . $order_id;
+        include("template/email_header.php");
 
-        $all_products = explode(',', $_POST['products']);
-        $message .= '<ul>';
-        foreach ($all_products as $prod_id) {
-          if ( is_int( $prod_id ) ) {
-            $prod = new WC_Product($prod_id);
-            if ( $prod )
-              $message .= '<li><b>' . $prod->post->post_title . ':</b> ' . $prod->id . '</li>';
+        $products = array();
+        $items = $order->get_items();
+        foreach ($_POST['wc_products'] as $prod_id) {
+          $p = new WC_Product( (int)sanitize_text_field($prod_id) );
+          if ( $p ) {
+            array_push($products, $p->id );
           }
         }
-        $message .= '</ul>';
+        include("template/email_items.php");
+        
+        include("template/email_footer.php");
+        $message = ob_get_contents();
+        ob_end_clean();
+
+        // get CSS styles
+        ob_start();
+        include("template/email_styles.php");
+        $css = ob_get_contents();
+        ob_end_clean();
+        $css = apply_filters( 'woocommerce_email_styles', $css );
+        // apply CSS styles inline for picky email clients
+        include_once(plugin_dir_path( __FILE__ ) . '/../woocommerce/includes/libraries/class-emogrifier.php');
+        $emogrifier = new Emogrifier( $message, $css );
+        $message = $emogrifier->emogrify();
 
         add_filter( 'wp_mail_content_type', 'wc_return_form_set_html_content_type' );
         $send = wp_mail($to, $subject, $message, $headers);
+        $send = 1;
         remove_filter( 'wp_mail_content_type', 'wc_return_form_set_html_content_type' );
 
         $json['send'] = $send;
-
         if ($send) {
           $json['response'] = __('Your order return request was send successfully and we contact you soon. Thank you.','wc_return');
           $json['result'] = true;
@@ -180,6 +198,9 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
             echo '<div class="error message">' . __('You must enter a valid number','wc-return') . '</div>';
           }
         }
+        if( isset( $_POST['wc_return_statuses'] ) ){
+          update_option('wc_return_statuses', $_POST['wc_return_statuses']);
+        }
         if ( $save )
           echo '<div class="updated message">' . __('Changes saved','wc-return') . '</div>';
       }
@@ -198,6 +219,23 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       echo '      <span class="description">'.__('This email will receive notices of return.','clever').'</span>';
       echo '    </td>';
       echo '    </tr>';
+      echo '    <tr>';
+      echo '    <th scope="row">';
+      echo '      <label for="wc_return_statuses">'.__('What status must have the order?','wc_return').'</label>';
+      echo '    </th>';
+      echo '    <td>';
+      echo '      <select name="wc_return_statuses[]" class="widefat" multiple="multiple" id="wc_return_statuses">';
+      $statusses = wc_get_order_statuses();
+      $statusses_sel = get_option( 'wc_return_statuses' );
+      foreach ($statusses as $key => $value) {
+        echo '      <option value="' . $key . '" ' . ((in_array($key, $statusses_sel)) ? 'selected="selected"' : '') . '>' . $value . '</option>';
+      }
+      echo '      </select>';
+      echo '      <br>';
+      echo '      <span class="description">'.__('The WC Return form will be available for orders with this status. You can select multiple by holding down the CMD or Ctrl key.','clever').'</span>';
+      echo '    </td>';
+      echo '    </tr>';
+      echo '    <tr>';
       echo '    <tr>';
       echo '    <th scope="row">';
       echo '      <label for="wc_return_days">'.__('How many days will be active this form after the order is completed?','wc_return').'</label>';
