@@ -1,0 +1,147 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WC Return products\n"
+"POT-Creation-Date: 2015-09-05 19:29+0200\n"
+"PO-Revision-Date: 2015-09-05 19:35+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: wc_return_product.php\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: template/email_header.php:52
+msgid "The customer wants to return these products"
+msgstr "El cliente desea devolver estos productos"
+
+#: template/email_items.php:19
+msgid "Product Image"
+msgstr "Imagen del producto"
+
+#: template/email_items.php:48
+#, php-format
+msgid "Download %d"
+msgstr "Descargar %d"
+
+#: template/email_items.php:50
+msgid "Download"
+msgstr "Descargar"
+
+#: wc_return_product.php:53
+msgid "Return order"
+msgstr "Devolución de mi pedido"
+
+#: wc_return_product.php:56
+msgid "Select products for return"
+msgstr "Seleccione los productos para devolver"
+
+#: wc_return_product.php:67
+msgid "You can select multiple by holding down the CMD or Ctrl key."
+msgstr "Puede seleccionar varios manteniendo presionada la tecla CMD o Ctrl."
+
+#: wc_return_product.php:70
+msgid "Submit"
+msgstr "Enviar"
+
+#: wc_return_product.php:94
+msgid "You must select some product"
+msgstr "Debe seleccionar algún producto"
+
+#: wc_return_product.php:97 wc_return_product.php:187 wc_return_product.php:259
+msgid "You must enter a valid email"
+msgstr "Debes introducir un email válido."
+
+#: wc_return_product.php:100
+msgid "You must enter a valid order id"
+msgstr "Debe introducir un id de orden válida"
+
+#: wc_return_product.php:109
+msgid "Return Order in "
+msgstr "Devolución de pedido en"
+
+#: wc_return_product.php:113
+msgid "Return Order "
+msgstr "Devolución de pedido"
+
+#: wc_return_product.php:148
+msgid ""
+"Your order return request was send successfully and we contact you soon. "
+"Thank you."
+msgstr ""
+"Su solicitud de devolución del pedido se ha enviado con éxito y nos "
+"pondremos en contacto con usted pronto. Gracias."
+
+#: wc_return_product.php:151
+msgid "Has encountered an unexpected error and was not able to send email"
+msgstr "Ha encontrado un error inesperado y no pudo enviar correo electrónico"
+
+#: wc_return_product.php:173
+msgid "You do not have sufficient permissions to access this page."
+msgstr "No tienes suficientes permisos para acceder a esta página."
+
+#: wc_return_product.php:198 wc_return_product.php:264
+msgid "You must enter a valid number"
+msgstr "Debe introducir un número válido"
+
+#: wc_return_product.php:205
+msgid "Changes saved"
+msgstr "Cambios guardados."
+
+#: wc_return_product.php:214
+msgid "Enter email to send return orders"
+msgstr "Ingrese correo electrónico para enviar órdenes de devolución"
+
+#: wc_return_product.php:219
+msgid "This email will receive notices of return."
+msgstr "Este correo electrónico recibirán avisos de devolución."
+
+#: wc_return_product.php:224
+msgid "What status must have the order?"
+msgstr "¿Qué estatus debe tener el pedido?"
+
+#: wc_return_product.php:235
+msgid ""
+"The WC Return form will be available for orders with this status. You can "
+"select multiple by holding down the CMD or Ctrl key."
+msgstr ""
+"El formulario de devolución estará disponible para pedidos con este estado. "
+"Puede seleccionar varios manteniendo presionada la tecla CMD o Ctrl."
+
+#: wc_return_product.php:241
+msgid "How many days will be active this form after the order is completed?"
+msgstr ""
+"¿Cuántos días estará activos este formulario después de completa el pedido?"
+
+#: wc_return_product.php:246
+msgid ""
+"Number of days that the form will be active after the order has been "
+"completed."
+msgstr ""
+"Número de días que el formulario estará activo después de que el pedido se "
+"ha completado."
+
+#. Plugin Name of the plugin/theme
+msgid "WC Return products"
+msgstr "WC Return products"
+
+#. Description of the plugin/theme
+msgid "Adds a form to order for return product"
+msgstr "Añade un formulario para devolver productos"
+
+#. Author of the plugin/theme
+msgid "Paco Castillo"
+msgstr "Paco Castillo"
+
+#. Author URI of the plugin/theme
+msgid "http://castillogomez.com/"
+msgstr "http://castillogomez.com/"
