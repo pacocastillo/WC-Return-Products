@@ -3,7 +3,7 @@ Contributors: pco_58
 Tags: woocommerce, return, products
 Requires at least: 3.8.1
 Tested up to: 4.2.4
-Stable tag: 1.2.1
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,13 @@ e.g.
 1. WC Return products settings page
 
 == Changelog ==
+
+= 1.3 =
+* Add new order status
+* Add note to order when products want to be returned
+
+= 1.2.2 =
+* Fix 4.3 WP update
 
 = 1.2.1 =
 * Fix .po errors for translate

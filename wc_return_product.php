@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 Plugin Name: WC Return products
 Plugin URL: http://castillogomez.com/
 Description: Adds a form to order for return product
-Version: 1.2.1
+Version: 1.3
 Author: Paco Castillo
 Author URI: http://castillogomez.com/
 Text Domain: wc_return
@@ -17,8 +17,13 @@ Domain Path: languages
 /**
  * Check if WooCommerce is active
  **/
+if (!function_exists('is_plugin_active_for_network'))
+  require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) || is_plugin_active_for_network('woocommerce/woocommerce.php') ) {
 
+  require_once( plugin_dir_path( __FILE__ ) . '/includes/wc_functions.php' );
+  
   add_action('wp_head','wc_return_products_ajaxurl');
 
   function wc_return_products_ajaxurl() {
@@ -32,6 +37,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
   function wc_return_form_init() {
     load_theme_textdomain('wc_return', plugin_dir_path( __FILE__ ) . 'languages');
     wp_enqueue_script( 'wc_return_form', plugins_url( 'assets/wc_return_form.js', __FILE__ ) , array('jquery'), false, true );
+    wc_create_custom_order_state();
   }
 
   // Add form to each order in user account
@@ -115,9 +121,14 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
         $products = array();
         $items = $order->get_items();
+        // Create note for add to order
+        $note = __('These products want to be returned: ', 'wc_return');
+        $n_prod = 0;
         foreach ($_POST['wc_products'] as $prod_id) {
           $p = new WC_Product( (int)sanitize_text_field($prod_id) );
           if ( $p ) {
+            $note .= (!$n_prod) ? $p->get_title() : ', '.$p->get_title();
+            $n_prod++;
             array_push($products, $p->id );
           }
         }
@@ -142,6 +153,9 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
         $send = wp_mail($to, $subject, $message, $headers);
         $send = 1;
         remove_filter( 'wp_mail_content_type', 'wc_return_form_set_html_content_type' );
+
+        // Change status and add note to order
+        do_action('wc_before_send_email', $order_id, $note);
 
         $json['send'] = $send;
         if ($send) {
