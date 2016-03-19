@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 Plugin Name: WC Return products
 Plugin URL: http://castillogomez.com/
 Description: Adds a form to order for return product
-Version: 1.3
+Version: 1.3.2
 Author: Paco Castillo
 Author URI: http://castillogomez.com/
 Text Domain: wc_return
@@ -22,7 +22,7 @@ if (!function_exists('is_plugin_active_for_network'))
 
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) || is_plugin_active_for_network('woocommerce/woocommerce.php') ) {
 
-  require_once( plugin_dir_path( __FILE__ ) . '/includes/wc_functions.php' );
+  require_once( plugin_dir_path( __FILE__ ) . 'includes/wc_functions.php' );
   
   add_action('wp_head','wc_return_products_ajaxurl');
 
@@ -117,7 +117,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
         ob_start();
         echo $subject;
         $email_heading = __('Return Order ', 'wc_return') . $order_id;
-        include("template/email_header.php");
+        include_once(dirname(__FILE__) . "/template/email_header.php");
 
         $products = array();
         $items = $order->get_items();
@@ -132,15 +132,15 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
             array_push($products, $p->id );
           }
         }
-        include("template/email_items.php");
+        include_once(dirname(__FILE__) . "/template/email_items.php");
         
-        include("template/email_footer.php");
+        include_once(dirname(__FILE__) . "/template/email_footer.php");
         $message = ob_get_contents();
         ob_end_clean();
 
         // get CSS styles
         ob_start();
-        include("template/email_styles.php");
+        include_once(dirname(__FILE__) . "/template/email_styles.php");
         $css = ob_get_contents();
         ob_end_clean();
         $css = apply_filters( 'woocommerce_email_styles', $css );

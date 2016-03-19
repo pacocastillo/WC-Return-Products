@@ -2,7 +2,7 @@
 /**
  *
  * Create Woocommerce new state for order
- *
+ * 
  */
 
 function wc_create_custom_order_state() {
@@ -52,7 +52,7 @@ function wc_add_custom_order_status_icon() {
 		/* Add custom status order icons */
 		.column-order_status mark.want-be-returned,
 		.column-order_status mark.building {
-			content: url(<?php echo plugins_url( '../assets/CustomOrderStatus.png', __FILE__ ) ?>);
+			content: url(<?php echo plugins_url(); ?>/wc-return-product/assets/CustomOrderStatus.png);
 		}
 	
 		/* Repeat for each different icon; tie to the correct status */
