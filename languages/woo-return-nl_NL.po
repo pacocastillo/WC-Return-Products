@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce - Product return form v1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-05-08 15:35+0200\n"
+"PO-Revision-Date: 2016-05-08 17:19+0200\n"
 "Last-Translator: admin <jrruiz@cleverconsulting.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -87,7 +87,7 @@ msgstr "Product terugkeer. Bestelnr."
 # @ woo-return
 #: woo-return-form.php:109
 msgid "Your order return request was send successfully and we contact you soon. Thank you."
-msgstr "Uw bestelling terugkeer verzoek werd met succes verzonden en wij nemen binnenkort contact met u op. Dank."
+msgstr "Het bestelling terugkeer verzoek werd met succes verzonden en wij nemen binnenkort contact met op."
 
 # @ woo-return
 #: woo-return-form.php:112
@@ -97,7 +97,7 @@ msgstr "Er is een fout opgetreden bij het versturen van een ​​e-mail"
 # @ default
 #: woo-return-form.php:133
 msgid "You do not have sufficient permissions to access this page."
-msgstr "U heeft onvoldoende rechten voor deze pagina."
+msgstr "Onvoldoende rechten voor deze pagina."
 
 # @ woo-return
 #: woo-return-form.php:140
@@ -107,4 +107,6 @@ msgstr "Wijzigingen opgeslagen"
 # @ woo-return
 #: woo-return-form.php:144
 msgid "Enter email to send return orders"
-msgstr "Geef uw e-mail adres waar we instrcties over het terugzenden zullen sturen."
+msgstr ""
+"Geef een e-mail adres waar we instrcties ov\n"
+"er het terugzenden zullen sturen."
