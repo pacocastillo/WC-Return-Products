@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 Plugin Name: WC Return products
 Plugin URL: http://castillogomez.com/
 Description: Adds a form to order for return product
-Version: 1.3.2
+Version: 1.3.3
 Author: Paco Castillo
 Author URI: http://castillogomez.com/
 Text Domain: wc_return
