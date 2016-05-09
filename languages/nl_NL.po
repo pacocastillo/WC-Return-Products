@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: woo-ret\n"
 "POT-Creation-Date: 2015-02-04 17:29+0100\n"
-"PO-Revision-Date: 2016-05-08 15:32+0200\n"
+"PO-Revision-Date: 2016-05-08 17:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -18,11 +18,11 @@ msgstr ""
 
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:32
 msgid "Return order"
-msgstr "Terugkeren naar bestelling"
+msgstr "Bestelling terug zenden"
 
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:35
 msgid "Select products for return"
-msgstr "Kies producten voor terugkeer"
+msgstr "Kies producten voor terugzenden"
 
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:39
 msgid "Select products..."
@@ -43,15 +43,15 @@ msgstr "Je moet een product selecteren"
 
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:87
 msgid "Product return. Order no. "
-msgstr "Product terugkeer. Bestelnr."
+msgstr "Product retour verzenden. Bestelnr."
 
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:108
 msgid ""
 "Your order return request was send successfully and we contact you soon. "
 "Thank you."
 msgstr ""
-"Uw bestelling terugkeer verzoek werd met succes verzonden en wij nemen "
-"binnenkort contact met u op. Dank."
+"Het product retour verzenden verzoek werd met succes geplaatst en wij nemen "
+"binnenkort contact op."
 
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:111
 msgid "Has encountered an unexpected error and was not able to send email"
@@ -59,7 +59,7 @@ msgstr "Er is een fout opgetreden bij het versturen van een ​​e-mail"
 
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:132
 msgid "You do not have sufficient permissions to access this page."
-msgstr "U heeft onvoldoende rechten voor deze pagina."
+msgstr "Onvoldoende rechten voor deze pagina."
 
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:139
 msgid "Changes saved"
@@ -68,4 +68,4 @@ msgstr "Wijzigingen opgeslagen"
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:143
 msgid "Enter email to send return orders"
 msgstr ""
-"Geef uw e-mail adres waar we instrcties over het terugzenden zullen sturen."
+"Geef het e-mail adres waar we instructies over het terugzenden zullen sturen."
