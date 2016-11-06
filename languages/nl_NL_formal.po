@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: woo-ret\n"
 "POT-Creation-Date: 2015-02-04 17:29+0100\n"
-"PO-Revision-Date: 2016-05-10 10:03+0200\n"
+"PO-Revision-Date: 2016-05-10 10:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -39,7 +39,7 @@ msgstr "Verstuur"
 
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:78
 msgid "You must select some product"
-msgstr "Je moet een product selecteren"
+msgstr "U moet een product selecteren"
 
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:87
 msgid "Product return. Order no. "
@@ -51,7 +51,7 @@ msgid ""
 "Thank you."
 msgstr ""
 "Het product retour verzenden verzoek werd met succes geplaatst en wij nemen "
-"binnenkort contact met je op."
+"binnenkort contact op."
 
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:111
 msgid "Has encountered an unexpected error and was not able to send email"
@@ -68,4 +68,5 @@ msgstr "Wijzigingen opgeslagen"
 #: /Applications/XAMPP/xamppfiles/htdocs/cosette_shop/wp-content/plugins/woo-return-form/woo-return-form.php:143
 msgid "Enter email to send return orders"
 msgstr ""
-"Geef het e-mail adres waar we instructies over het terugzenden zullen sturen."
+"Geef aub het e-mail adres waar we instructies over het terugzenden heen "
+"zullen sturen."
