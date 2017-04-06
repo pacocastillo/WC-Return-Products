@@ -230,7 +230,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       echo '    <td>';
       echo '      <input id="wc_return_email" name="wc_return_email" type="text" value="' . $the_email . '" />';
       echo '      <br>';
-      echo '      <span class="description">'.__('This email will receive notices of return.','clever').'</span>';
+      echo '      <span class="description">'.__('This email will receive notices of return.','wc_return').'</span>';
       echo '    </td>';
       echo '    </tr>';
       echo '    <tr>';
