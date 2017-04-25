@@ -230,7 +230,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       echo '    <td>';
       echo '      <input id="wc_return_email" name="wc_return_email" type="text" value="' . $the_email . '" />';
       echo '      <br>';
-      echo '      <span class="description">'.__('This email will receive notices of return.','clever').'</span>';
+      echo '      <span class="description">'.__('This email will receive notices of return.','wc_return').'</span>';
       echo '    </td>';
       echo '    </tr>';
       echo '    <tr>';
@@ -246,7 +246,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       }
       echo '      </select>';
       echo '      <br>';
-      echo '      <span class="description">'.__('The WC Return form will be available for orders with this status. You can select multiple by holding down the CMD or Ctrl key.','clever').'</span>';
+      echo '      <span class="description">'.__('The WC Return form will be available for orders with this status. You can select multiple by holding down the CMD or Ctrl key.','wc_return').'</span>';
       echo '    </td>';
       echo '    </tr>';
       echo '    <tr>';
@@ -257,7 +257,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       echo '    <td>';
       echo '      <input id="wc_return_days" name="wc_return_days" type="number" value="' . $days . '" />';
       echo '      <br>';
-      echo '      <span class="description">'.__('Number of days that the form will be active after the order has been completed.','clever').'</span>';
+      echo '      <span class="description">'.__('Number of days that the form will be active after the order has been completed.','wc_return').'</span>';
       echo '    </td>';
       echo '    </tr>';
       echo '  </tbody>';
