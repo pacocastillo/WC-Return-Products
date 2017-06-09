@@ -96,7 +96,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       $order_id = ($order != null) ? $_POST['order'] : false;
 
       // check if selected some product
-      if ( count($_POST['wc_products']) == 0  ) {
+      if ( !is_array($_POST['wc_products'])  ) {
         $json['response'] = __('You must select some product','wc_return');
       }
       else if ( !$to ) {
